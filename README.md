@@ -1,7 +1,7 @@
 # Multi-Model Crop Disease Prediction System
 
 A comprehensive deep learning system for plant disease classification using 5 unique architectures with RLHF integration and council-based ensemble prediction.
-
+Application link :"https://huggingface.co/spaces/Danielchris145/leaf-disease-prediction"
 ## 🌿 Overview
 
 This system implements 5 cutting-edge deep learning models for plant disease detection:
