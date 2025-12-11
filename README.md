@@ -11,7 +11,6 @@ This system implements 5 cutting-edge deep learning models for plant disease det
 | LGNM | `train1.py` | Leaf-Graph Neural Morphing | GNN-based vein structure analysis |
 | ADSD | `train2.py` | Adaptive Disease Signature Diffusion | Diffusion-based augmentation |
 | S-ViT Lite | `train3.py` | Spectral-Aware Vision Transformer | RGB + pseudo-NIR fusion |
-| FALC-Fed | `train4.py` | Federated Continual Learning | On-device adapters + federated learning |
 | ECAM | `train5.py` | Explainable Causal Attribution | Counterfactual causal reasoning |
 
 ## 📁 Project Structure
@@ -94,13 +93,7 @@ Each model is designed to achieve >95% accuracy through:
 - Lightweight ViT architecture
 - NDVI-like vegetation index integration
 
-### 4. FALC-Fed (Federated Adaptive Lightweight Continual)
-- MobileNetV3 backbone for efficiency
-- Lightweight adapter modules
-- Federated learning simulation
-- Experience replay for continual learning
-
-### 5. ECAM (Explainable Causal Attribution Module)
+### 4. ECAM (Explainable Causal Attribution Module)
 - ResNet50 backbone with causal modules
 - Counterfactual intervention for explanation
 - Graph-based causal reasoning
@@ -144,7 +137,6 @@ The council system combines all 5 models using:
 | LGNM | >95% | >95% | >94% |
 | ADSD | >96% | >95% | >94% |
 | S-ViT Lite | >96% | >95% | >95% |
-| FALC-Fed | >95% | >94% | >93% |
 | ECAM | >96% | >95% | >94% |
 | **Council** | - | **>97%** | **>96%** |
 
