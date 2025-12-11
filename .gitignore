@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+
+# Large files and datasets
+*.zip
+*.h5
+*.pt
+*.pth
+*.ckpt
+dataset/
+model_files/
+*.keras
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Results and outputs (optional - remove if you want to track these)
+council_visualization/

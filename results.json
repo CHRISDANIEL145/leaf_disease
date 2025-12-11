@@ -1,0 +1,14 @@
+[
+  {
+    "final_prediction": {
+      "class": "Apple___Cedar_apple_rust",
+      "class_idx": 2,
+      "confidence": 0.980761247050515
+    },
+    "model_agreement": 1.0,
+    "individual_predictions": {
+      "ADSD": {
+        "class": "Apple___Cedar_apple_rust",
+        "class_idx": 2,
+        "confidence": 0.9908169507980347,
+        "agrees_with_final": 

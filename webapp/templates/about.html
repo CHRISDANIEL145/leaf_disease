@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="px-6 py-20">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">About the</span>
+                <span class="bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    Technology</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Discover the cutting-edge AI that powers our crop disease detection system
+            </p>
+        </div>
+
+        <!-- Model Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- LGNM -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up">
+                <div class="flex items-start gap-4 mb-6">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neon-teal/20 to-neon-green/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="network" class="w-7 h-7 text-neon-teal"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-white">LGNM</h3>
+                        <p class="text-neon-teal text-sm">Leaf-Graph Neural Morphing</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Extracts vein structures from leaf images and processes them using Graph Neural Networks. Combines
+                    visual CNN features with topological graph features for enhanced disease detection.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">MobileNetV3</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">GNN</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Vein Analysis</span>
+                </div>
+            </div>
+
+            <!-- ADSD -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-start gap-4 mb-6">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neon-green/20 to-neon-cyan/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="sparkles" class="w-7 h-7 text-neon-green"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-white">ADSD</h3>
+                        <p class="text-neon-green text-sm">Adaptive Disease Signature Diffusion</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Uses signature-based augmentation to enhance disease pattern recognition. Lightweight architecture
+                    optimized for speed while maintaining high accuracy.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">EfficientNet-B0</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Signature Learning</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Fast Inference</span>
+                </div>
+            </div>
+
+            <!-- S-ViT Lite -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-start gap-4 mb-6">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="eye" class="w-7 h-7 text-neon-cyan"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-white">S-ViT Lite</h3>
+                        <p class="text-neon-cyan text-sm">Spectral Vision Transformer</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Combines RGB with pseudo-NIR spectral information using spectral attention. Vision Transformer
+                    architecture for global context understanding.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">ViT Architecture</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Pseudo-NIR</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Spectral Attention</span>
+                </div>
+            </div>
+
+            <!-- ECAM -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="300">
+                <div class="flex items-start gap-4 mb-6">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neon-purple/20 to-neon-teal/20 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="git-branch" class="w-7 h-7 text-neon-purple"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-white">ECAM</h3>
+                        <p class="text-purple-400 text-sm">Explainable Causal Attribution Module</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Provides interpretable predictions through causal reasoning. Generates attention maps showing which
+                    leaf regions influenced the diagnosis.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">ResNet Backbone</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Causal Inference</span>
+                    <span class="px-3 py-1 rounded-full bg-space-700 text-gray-300 text-xs">Explainable AI</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dataset Info -->
+        <div class="glass-card rounded-3xl p-8 mb-16" data-aos="fade-up">
+            <h2 class="font-display text-2xl font-bold text-white mb-6 text-center">Training Dataset</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div
+                        class="text-3xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                        87K+</div>
+                    <div class="text-gray-400 text-sm mt-1">Training Images</div>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="text-3xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                        38</div>
+                    <div class="text-gray-400 text-sm mt-1">Disease Classes</div>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="text-3xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                        14</div>
+                    <div class="text-gray-400 text-sm mt-1">Crop Species</div>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="text-3xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                        96%+</div>
+                    <div class="text-gray-400 text-sm mt-1">Accuracy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="text-center" data-aos="fade-up">
+            <h2 class="font-display text-2xl font-bold text-white mb-8">Technology Stack</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="glass-card px-6 py-3 rounded-xl flex items-center gap-2">
+                    <span class="text-gray-300">PyTorch</span>
+                </div>
+                <div class="glass-card px-6 py-3 rounded-xl flex items-center gap-2">
+                    <span class="text-gray-300">Flask</span>
+                </div>
+                <div class="glass-card px-6 py-3 rounded-xl flex items-center gap-2">
+                    <span class="text-gray-300">EfficientNet</span>
+                </div>
+                <div class="glass-card px-6 py-3 rounded-xl flex items-center gap-2">
+                    <span class="text-gray-300">Tailwind CSS</span>
+                </div>
+                <div class="glass-card px-6 py-3 rounded-xl flex items-center gap-2">
+                    <span class="text-gray-300">CUDA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

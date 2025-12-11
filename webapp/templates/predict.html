@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+
+{% block title %}Predict Disease{% endblock %}
+
+{% block content %}
+<section class="px-6 py-20">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">Council</span>
+                <span class="bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    Prediction</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Upload a leaf image to get predictions from all 4 AI models with ensemble voting
+            </p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Upload Section -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up">
+                <h2 class="font-display text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="upload-cloud" class="w-5 h-5 text-neon-teal"></i>
+                    Input Image
+                </h2>
+
+                <div id="upload-area"
+                    class="relative border-2 border-dashed border-white/20 rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 hover:border-neon-teal/50 hover:bg-neon-teal/5">
+                    <input type="file" id="file-input" accept="image/*"
+                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+
+                    <div id="upload-placeholder">
+                        <div
+                            class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-neon-teal/20 to-neon-green/20 flex items-center justify-center mb-4">
+                            <i data-lucide="image-plus" class="w-8 h-8 text-neon-teal"></i>
+                        </div>
+                        <h3 class="font-semibold text-white text-lg mb-2">Drop image here</h3>
+                        <p class="text-gray-400 text-sm">or click to browse</p>
+                    </div>
+
+                    <div id="image-preview" class="hidden">
+                        <img id="preview-img" src="" alt="Preview" class="max-h-48 mx-auto rounded-xl">
+                    </div>
+                </div>
+
+                <!-- Predict Button -->
+                <button id="predict-btn" disabled
+                    class="w-full mt-6 py-4 bg-gradient-to-r from-neon-teal to-neon-green text-space-900 font-bold text-lg rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:shadow-neon-teal/30 hover:-translate-y-0.5 disabled:hover:translate-y-0 flex items-center justify-center gap-2">
+                    <i data-lucide="brain" class="w-5 h-5"></i>
+                    <span id="btn-text">Analyze with Council</span>
+                </button>
+
+                <!-- Loading State -->
+                <div id="loading-state" class="hidden mt-6">
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-6 h-6 border-2 border-neon-teal border-t-transparent rounded-full animate-spin">
+                        </div>
+                        <span class="text-neon-teal font-medium">Consulting all models...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Council Decision -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="font-display text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5 text-neon-green"></i>
+                    Council Decision
+                </h2>
+
+                <div id="no-results" class="text-center py-10">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-space-700 flex items-center justify-center mb-4">
+                        <i data-lucide="file-search" class="w-8 h-8 text-gray-500"></i>
+                    </div>
+                    <p class="text-gray-500">Upload image to see prediction</p>
+                </div>
+
+                <div id="results-content" class="hidden">
+                    <!-- Prediction -->
+                    <div class="text-center mb-6">
+                        <p class="text-gray-400 text-sm mb-2">Prediction:</p>
+                        <div id="result-condition" class="font-display text-2xl font-bold text-white mb-1"></div>
+                        <div id="result-plant" class="text-neon-teal text-sm"></div>
+                    </div>
+
+                    <!-- Confidence -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-400 text-sm">Confidence:</span>
+                            <span id="confidence-value" class="text-neon-green font-bold text-lg"></span>
+                        </div>
+                        <div class="h-3 bg-space-700 rounded-full overflow-hidden">
+                            <div id="confidence-bar"
+                                class="h-full bg-gradient-to-r from-neon-teal to-neon-green rounded-full transition-all duration-1000"
+                                style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Agreement -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-400 text-sm">Model Agreement:</span>
+                            <span id="agreement-value" class="text-neon-cyan font-bold"></span>
+                        </div>
+                        <div class="h-2 bg-space-700 rounded-full overflow-hidden">
+                            <div id="agreement-bar"
+                                class="h-full bg-neon-cyan rounded-full transition-all duration-1000" style="width: 0%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Level -->
+                    <div class="text-center">
+                        <span id="risk-badge"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Confidences -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="font-display text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="bar-chart-3" class="w-5 h-5 text-neon-cyan"></i>
+                    Model Confidences
+                </h2>
+
+                <div id="no-models" class="text-center py-10">
+                    <p class="text-gray-500">Waiting for prediction...</p>
+                </div>
+
+                <div id="model-bars" class="hidden space-y-4">
+                    <!-- Model bars will be inserted here -->
+                </div>
+
+                <!-- Legend -->
+                <div id="model-legend" class="hidden mt-6 flex justify-center gap-6 text-sm">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded bg-neon-green"></div>
+                        <span class="text-gray-400">Agrees</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded bg-red-500"></div>
+                        <span class="text-gray-400">Disagrees</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Treatment Info -->
+        <div id="treatment-section" class="hidden mt-8 grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up">
+            <div class="glass-card rounded-3xl p-8">
+                <h3 class="font-display text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i data-lucide="pill" class="w-5 h-5 text-neon-teal"></i>
+                    Treatment Recommendation
+                </h3>
+                <p id="result-treatment" class="text-gray-300 leading-relaxed"></p>
+            </div>
+            <div class="glass-card rounded-3xl p-8">
+                <h3 class="font-display text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-neon-green"></i>
+                    Prevention Tips
+                </h3>
+                <p id="result-prevention" class="text-gray-300 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const fileInput = document.getElementById('file-input');
+    const uploadArea = document.getElementById('upload-area');
+    const uploadPlaceholder = document.getElementById('upload-placeholder');
+    const imagePreview = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+    const predictBtn = document.getElementById('predict-btn');
+    const btnText = document.getElementById('btn-text');
+    const loadingState = document.getElementById('loading-state');
+    const noResults = document.getElementById('no-results');
+    const resultsContent = document.getElementById('results-content');
+    const noModels = document.getElementById('no-models');
+    const modelBars = document.getElementById('model-bars');
+    const modelLegend = document.getElementById('model-legend');
+    const treatmentSection = document.getElementById('treatment-section');
+
+    let selectedFile = null;
+
+    // File selection handler
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) handleFile(file);
+    });
+
+    // Drag and drop
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('border-neon-teal', 'bg-neon-teal/10');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('border-neon-teal', 'bg-neon-teal/10');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('border-neon-teal', 'bg-neon-teal/10');
+        const file = e.dataTransfer.files[0];
+        if (file) handleFile(file);
+    });
+
+    function handleFile(file) {
+        selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            previewImg.src = e.target.result;
+            uploadPlaceholder.classList.add('hidden');
+            imagePreview.classList.remove('hidden');
+            predictBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Predict button handler
+    predictBtn.addEventListener('click', async () => {
+        if (!selectedFile) return;
+
+        // Show loading
+        predictBtn.disabled = true;
+        btnText.textContent = 'Analyzing...';
+        loadingState.classList.remove('hidden');
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                displayResults(result);
+            } else {
+                alert('Error: ' + (result.error || 'Unknown error'));
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        } finally {
+            loadingState.classList.add('hidden');
+            btnText.textContent = 'Analyze with Council';
+            predictBtn.disabled = false;
+        }
+    });
+
+    function displayResults(result) {
+        // Show results sections
+        noResults.classList.add('hidden');
+        resultsContent.classList.remove('hidden');
+        noModels.classList.add('hidden');
+        modelBars.classList.remove('hidden');
+        modelLegend.classList.remove('hidden');
+        treatmentSection.classList.remove('hidden');
+
+        // Condition and plant
+        document.getElementById('result-condition').textContent = result.condition;
+        document.getElementById('result-plant').textContent = 'Plant: ' + result.plant;
+
+        // Confidence
+        document.getElementById('confidence-value').textContent = result.confidence.toFixed(1) + '%';
+        setTimeout(() => {
+            document.getElementById('confidence-bar').style.width = result.confidence + '%';
+        }, 100);
+
+        // Agreement
+        document.getElementById('agreement-value').textContent = result.agreement.toFixed(0) + '%';
+        setTimeout(() => {
+            document.getElementById('agreement-bar').style.width = result.agreement + '%';
+        }, 200);
+
+        // Risk level badge
+        const riskBadge = document.getElementById('risk-badge');
+        const risk = result.risk_level || 'Medium';
+        riskBadge.textContent = risk + ' Risk';
+        riskBadge.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ';
+        if (risk === 'None' || result.is_healthy) {
+            riskBadge.classList.add('bg-neon-green/20', 'text-neon-green');
+        } else if (risk === 'High' || risk === 'Critical') {
+            riskBadge.classList.add('bg-red-500/20', 'text-red-400');
+        } else {
+            riskBadge.classList.add('bg-yellow-500/20', 'text-yellow-400');
+        }
+
+        // Treatment and prevention
+        document.getElementById('result-treatment').textContent = result.treatment;
+        document.getElementById('result-prevention').textContent = result.prevention;
+
+        // Model confidence bars
+        modelBars.innerHTML = '';
+        if (result.models) {
+            const modelOrder = ['S-ViT_Lite', 'LGNM', 'ECAM', 'ADSD'];
+
+            for (const name of modelOrder) {
+                const model = result.models[name];
+                if (!model) continue;
+
+                const agrees = model.agrees;
+                const conf = model.confidence;
+
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-gray-300 text-sm font-medium">${name}</span>
+                        <span class="text-gray-400 text-xs">${conf.toFixed(1)}%</span>
+                    </div>
+                    <div class="h-6 bg-space-700 rounded overflow-hidden">
+                        <div class="h-full rounded transition-all duration-700 ${agrees ? 'bg-neon-green' : 'bg-red-500'}" style="width: 0%"></div>
+                    </div>
+                `;
+                modelBars.appendChild(div);
+
+                // Animate bar
+                setTimeout(() => {
+                    div.querySelector('.h-6 > div').style.width = conf + '%';
+                }, 300);
+            }
+        }
+
+        // Reinitialize icons
+        lucide.createIcons();
+    }
+
+    lucide.createIcons();
+</script>
+{% endblock %}

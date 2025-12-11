@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<section class="px-6 py-20">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">Analysis</span>
+                <span class="bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    Dashboard</span>
+            </h1>
+            <p class="text-gray-400 text-lg">View recent predictions and statistics</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12" data-aos="fade-up">
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div id="stat-total"
+                    class="text-3xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    0</div>
+                <div class="text-gray-400 text-sm mt-1">Total Scans</div>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div id="stat-healthy" class="text-3xl font-bold text-neon-green">0</div>
+                <div class="text-gray-400 text-sm mt-1">Healthy</div>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div id="stat-diseased" class="text-3xl font-bold text-red-400">0</div>
+                <div class="text-gray-400 text-sm mt-1">Diseased</div>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div id="stat-confidence" class="text-3xl font-bold text-neon-cyan">0%</div>
+                <div class="text-gray-400 text-sm mt-1">Avg Confidence</div>
+            </div>
+        </div>
+
+        <!-- Chart and Recent -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Chart Area -->
+            <div class="lg:col-span-2 glass-card rounded-3xl p-8" data-aos="fade-up">
+                <h2 class="font-display text-xl font-bold text-white mb-6">Confidence Distribution</h2>
+                <div id="chart-container" class="h-64">
+                    <canvas id="confidence-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Predictions -->
+            <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="font-display text-xl font-bold text-white mb-6">Recent Scans</h2>
+                <div id="recent-list" class="space-y-4">
+                    <div class="text-center text-gray-500 py-10">
+                        <i data-lucide="inbox" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+                        <p>No predictions yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Predictions Table -->
+        <div class="mt-8 glass-card rounded-3xl p-8" data-aos="fade-up">
+            <h2 class="font-display text-xl font-bold text-white mb-6">All Predictions</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left text-gray-400 text-sm border-b border-white/10">
+                            <th class="pb-4">Plant</th>
+                            <th class="pb-4">Condition</th>
+                            <th class="pb-4">Confidence</th>
+                            <th class="pb-4">Risk</th>
+                            <th class="pb-4">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="predictions-table" class="text-sm">
+                        <tr>
+                            <td colspan="5" class="py-10 text-center text-gray-500">No predictions available</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let chart = null;
+
+    async function loadStats() {
+        try {
+            const response = await fetch('/api/stats');
+            const stats = await response.json();
+
+            document.getElementById('stat-total').textContent = stats.total_predictions;
+            document.getElementById('stat-healthy').textContent = stats.healthy_count;
+            document.getElementById('stat-diseased').textContent = stats.diseased_count;
+            document.getElementById('stat-confidence').textContent = stats.avg_confidence.toFixed(1) + '%';
+        } catch (error) {
+            console.error('Error loading stats:', error);
+        }
+    }
+
+    async function loadPredictions() {
+        try {
+            const response = await fetch('/api/predictions');
+            const predictions = await response.json();
+
+            // Update recent list
+            const recentList = document.getElementById('recent-list');
+            if (predictions.length > 0) {
+                recentList.innerHTML = predictions.slice(0, 5).map(p => `
+                    <div class="flex items-center gap-3 p-3 rounded-xl bg-space-700/50">
+                        <div class="w-10 h-10 rounded-lg ${p.is_healthy ? 'bg-neon-green/20' : 'bg-red-500/20'} flex items-center justify-center">
+                            <i data-lucide="${p.is_healthy ? 'check' : 'alert-triangle'}" class="w-5 h-5 ${p.is_healthy ? 'text-neon-green' : 'text-red-400'}"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-white text-sm font-medium truncate">${p.condition}</p>
+                            <p class="text-gray-500 text-xs">${p.plant}</p>
+                        </div>
+                        <span class="text-gray-400 text-xs">${p.confidence.toFixed(0)}%</span>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+            }
+
+            // Update table
+            const table = document.getElementById('predictions-table');
+            if (predictions.length > 0) {
+                table.innerHTML = predictions.map(p => `
+                    <tr class="border-b border-white/5">
+                        <td class="py-4 text-white">${p.plant}</td>
+                        <td class="py-4 text-gray-300">${p.condition}</td>
+                        <td class="py-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-16 h-2 bg-space-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-neon-teal to-neon-green" style="width: ${p.confidence}%"></div>
+                                </div>
+                                <span class="text-gray-400">${p.confidence.toFixed(1)}%</span>
+                            </div>
+                        </td>
+                        <td class="py-4">
+                            <span class="px-2 py-1 rounded-full text-xs ${p.is_healthy ? 'bg-neon-green/20 text-neon-green' : p.risk_level === 'High' ? 'bg-red-500/20 text-red-400' : 'bg-yellow-500/20 text-yellow-400'}">${p.risk_level || 'N/A'}</span>
+                        </td>
+                        <td class="py-4 text-gray-500">${p.timestamp || 'N/A'}</td>
+                    </tr>
+                `).join('');
+            }
+
+            // Update chart
+            updateChart(predictions);
+
+        } catch (error) {
+            console.error('Error loading predictions:', error);
+        }
+    }
+
+    function updateChart(predictions) {
+        const ctx = document.getElementById('confidence-chart').getContext('2d');
+
+        if (chart) {
+            chart.destroy();
+        }
+
+        const labels = predictions.slice(0, 10).map((p, i) => `Scan ${i + 1}`);
+        const data = predictions.slice(0, 10).map(p => p.confidence);
+        const colors = predictions.slice(0, 10).map(p => p.is_healthy ? 'rgba(0, 255, 136, 0.8)' : 'rgba(239, 68, 68, 0.8)');
+
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Confidence %',
+                    data: data,
+                    backgroundColor: colors,
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Load data on page load
+    loadStats();
+    loadPredictions();
+
+    // Refresh every 30 seconds
+    setInterval(() => {
+        loadStats();
+        loadPredictions();
+    }, 30000);
+</script>
+{% endblock %}

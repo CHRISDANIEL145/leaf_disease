@@ -1,0 +1,31 @@
+{
+  "baseline_accuracy": 0.023157894736842106,
+  "final_accuracy": 0.9389473684210526,
+  "improvement": 0.9157894736842105,
+  "active_learning_history": [
+    {
+      "round": 0,
+      "samples": 200,
+      "accuracy": 0.9357894736842105
+    },
+    {
+      "round": 1,
+      "samples": 250,
+      "accuracy": 0.9342105263157895,
+      "avg_uncertainty": 1.914684772491455
+    },
+    {
+      "round": 2,
+      "samples": 300,
+      "accuracy": 0.9336842105263158,
+      "avg_uncertainty": 1.7570695877075195
+    },
+    {
+      "round": 3,
+      "samples": 350,
+      "accuracy": 0.9331578947368421,
+      "avg_uncertainty": 1.6330779790878296
+    }
+  ],
+  "model_name": "S-ViT_Lite"
+}

@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-7xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-teal/10 border border-neon-teal/30 mb-8"
+            data-aos="fade-down">
+            <span class="w-2 h-2 rounded-full bg-neon-teal animate-pulse"></span>
+            <span class="text-neon-teal text-sm font-medium">AI-Powered Disease Detection</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6" data-aos="fade-up">
+            <span class="block text-white">Protect Your Crops</span>
+            <span
+                class="block bg-gradient-to-r from-neon-teal via-neon-green to-neon-cyan bg-clip-text text-transparent">With
+                AI Intelligence</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+            Upload a leaf image and instantly detect plant diseases using our advanced deep learning models.
+            <span class="text-neon-teal">38 diseases</span> across <span class="text-neon-green">14 crop species</span>.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+            <a href="/predict"
+                class="group relative px-8 py-4 bg-gradient-to-r from-neon-teal to-neon-green text-space-900 font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-neon-teal/30 hover:-translate-y-1">
+                <span class="relative z-10 flex items-center gap-2 justify-center">
+                    <i data-lucide="upload" class="w-5 h-5"></i>
+                    Upload Leaf Image
+                </span>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-neon-green to-neon-teal opacity-0 group-hover:opacity-100 transition-opacity">
+                </div>
+            </a>
+            <a href="/about"
+                class="px-8 py-4 border-2 border-white/20 text-white font-bold text-lg rounded-2xl hover:bg-white/5 hover:border-neon-teal/50 transition-all duration-300 flex items-center gap-2 justify-center">
+                <i data-lucide="info" class="w-5 h-5"></i>
+                Learn More
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20" data-aos="fade-up" data-aos-delay="300">
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div
+                    class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    96%+</div>
+                <div class="text-gray-400 text-sm mt-1">Accuracy</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div
+                    class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    38</div>
+                <div class="text-gray-400 text-sm mt-1">Diseases</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div
+                    class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    14</div>
+                <div class="text-gray-400 text-sm mt-1">Crop Types</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div
+                    class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    &lt;1s</div>
+                <div class="text-gray-400 text-sm mt-1">Detection Time</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce" data-aos="fade-up" data-aos-delay="400">
+        <i data-lucide="chevron-down" class="w-8 h-8 text-neon-teal/50"></i>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="relative px-6 py-20">
+    <div class="max-w-7xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">Next-Gen</span>
+                <span class="bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent">
+                    Technology</span>
+            </h2>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Powered by cutting-edge deep learning models for accurate and instant disease detection
+            </p>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="feature-card group" data-aos="fade-up" data-aos-delay="0">
+                <div
+                    class="relative p-8 rounded-3xl bg-gradient-to-br from-space-700/50 to-space-800/50 border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-neon-teal/30 hover:shadow-2xl hover:shadow-neon-teal/10">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-neon-teal/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-teal/20 to-neon-green/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="brain" class="w-8 h-8 text-neon-teal"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-3">Deep Learning</h3>
+                        <p class="text-gray-400">Advanced neural networks trained on 80,000+ images for precise disease
+                            classification with 96%+ accuracy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card group" data-aos="fade-up" data-aos-delay="100">
+                <div
+                    class="relative p-8 rounded-3xl bg-gradient-to-br from-space-700/50 to-space-800/50 border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-neon-green/30 hover:shadow-2xl hover:shadow-neon-green/10">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-neon-green/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-green/20 to-neon-cyan/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="zap" class="w-8 h-8 text-neon-green"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-3">Instant Analysis</h3>
+                        <p class="text-gray-400">Get real-time predictions in under a second. Upload any leaf image and
+                            receive immediate results.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card group" data-aos="fade-up" data-aos-delay="200">
+                <div
+                    class="relative p-8 rounded-3xl bg-gradient-to-br from-space-700/50 to-space-800/50 border border-white/5 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-neon-cyan/30 hover:shadow-2xl hover:shadow-neon-cyan/10">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-neon-cyan"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-3">Treatment Advice</h3>
+                        <p class="text-gray-400">Receive detailed treatment recommendations and prevention tips for each
+                            detected disease.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="relative px-6 py-20">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">How It</span>
+                <span class="bg-gradient-to-r from-neon-teal to-neon-green bg-clip-text text-transparent"> Works</span>
+            </h2>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Three simple steps to protect your crops
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="relative" data-aos="fade-up" data-aos-delay="0">
+                <div class="glass-card p-8 rounded-3xl text-center relative z-10">
+                    <div
+                        class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-neon-teal to-neon-green flex items-center justify-center text-2xl font-bold text-space-900 mb-6">
+                        1</div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Upload Image</h3>
+                    <p class="text-gray-400">Take a photo of the affected leaf and upload it to our system</p>
+                </div>
+                <div class="hidden md:block absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 z-0">
+                    <i data-lucide="arrow-right" class="w-8 h-8 text-neon-teal/30"></i>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card p-8 rounded-3xl text-center relative z-10">
+                    <div
+                        class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-neon-green to-neon-cyan flex items-center justify-center text-2xl font-bold text-space-900 mb-6">
+                        2</div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">AI Analysis</h3>
+                    <p class="text-gray-400">Our deep learning model analyzes the image for disease patterns</p>
+                </div>
+                <div class="hidden md:block absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 z-0">
+                    <i data-lucide="arrow-right" class="w-8 h-8 text-neon-teal/30"></i>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-8 rounded-3xl text-center">
+                    <div
+                        class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-neon-cyan to-neon-purple flex items-center justify-center text-2xl font-bold text-space-900 mb-6">
+                        3</div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Get Results</h3>
+                    <p class="text-gray-400">Receive detailed diagnosis with treatment recommendations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="relative px-6 py-20">
+    <div class="max-w-4xl mx-auto">
+        <div class="relative p-10 md:p-16 rounded-3xl bg-gradient-to-br from-neon-teal/20 via-space-700/50 to-neon-green/20 border border-neon-teal/30 overflow-hidden"
+            data-aos="fade-up">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(0,212,170,0.2),transparent_50%)]">
+            </div>
+            <div class="relative z-10 text-center">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+                    Ready to Protect Your Crops?
+                </h2>
+                <p class="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
+                    Start using AI-powered disease detection today. It's fast, accurate, and free.
+                </p>
+                <a href="/predict"
+                    class="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-neon-teal to-neon-green text-space-900 font-bold text-lg rounded-2xl hover:shadow-2xl hover:shadow-neon-teal/30 transition-all duration-300 hover:-translate-y-1">
+                    <i data-lucide="scan" class="w-5 h-5"></i>
+                    Start Analysis Now
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{
+  "baseline_accuracy": 0.03736842105263158,
+  "final_accuracy": 0.9536842105263158,
+  "improvement": 0.9163157894736842,
+  "active_learning_history": [
+    {
+      "round": 0,
+      "samples": 200,
+      "accuracy": 0.9289473684210526
+    },
+    {
+      "round": 1,
+      "samples": 250,
+      "accuracy": 0.9321052631578948,
+      "avg_uncertainty": 1.9335811138153076
+    },
+    {
+      "round": 2,
+      "samples": 300,
+      "accuracy": 0.9426315789473684,
+      "avg_uncertainty": 1.7073156833648682
+    },
+    {
+      "round": 3,
+      "samples": 350,
+      "accuracy": 0.9489473684210527,
+      "avg_uncertainty": 1.5757402181625366
+    }
+  ],
+  "model_name": "LGNM"
+}

@@ -1,0 +1,31 @@
+{
+  "baseline_accuracy": 0.026842105263157896,
+  "final_accuracy": 0.9621052631578947,
+  "improvement": 0.9352631578947368,
+  "active_learning_history": [
+    {
+      "round": 0,
+      "samples": 200,
+      "accuracy": 0.9357894736842105
+    },
+    {
+      "round": 1,
+      "samples": 250,
+      "accuracy": 0.9310526315789474,
+      "avg_uncertainty": 1.934144139289856
+    },
+    {
+      "round": 2,
+      "samples": 300,
+      "accuracy": 0.9457894736842105,
+      "avg_uncertainty": 1.7524641752243042
+    },
+    {
+      "round": 3,
+      "samples": 350,
+      "accuracy": 0.9542105263157895,
+      "avg_uncertainty": 1.5867233276367188
+    }
+  ],
+  "model_name": "ECAM"
+}

@@ -1,0 +1,381 @@
+/* ============================================================================
+   LeafAI - Custom Styles
+   Futuristic, Modern, Glassmorphism Design
+   ============================================================================ */
+
+/* Base Styles */
+:root {
+    --neon-teal: #00d4aa;
+    --neon-green: #00ff88;
+    --neon-cyan: #00e5ff;
+    --neon-purple: #a855f7;
+    --space-900: #0a0a0f;
+    --space-800: #0f0f1a;
+    --space-700: #151525;
+    --space-600: #1a1a2e;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--space-900);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--neon-teal), var(--neon-green));
+    border-radius: 4px;
+}
+
+/* Selection */
+::selection {
+    background: rgba(0, 212, 170, 0.3);
+    color: white;
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(0, 212, 170, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 212, 170, 0.1);
+}
+
+/* Neon Glow Effects */
+.neon-glow {
+    box-shadow: 
+        0 0 5px var(--neon-teal),
+        0 0 10px var(--neon-teal),
+        0 0 20px var(--neon-teal),
+        0 0 40px var(--neon-teal);
+}
+
+.neon-text {
+    text-shadow: 
+        0 0 5px var(--neon-teal),
+        0 0 10px var(--neon-teal),
+        0 0 20px var(--neon-teal);
+}
+
+/* Animations */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px var(--neon-teal), 0 0 10px var(--neon-teal);
+    }
+    to {
+        box-shadow: 0 0 10px var(--neon-teal), 0 0 20px var(--neon-teal), 0 0 30px var(--neon-teal);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Feature Card Hover Effect */
+.feature-card:hover .feature-card-inner {
+    transform: translateY(-5px);
+}
+
+/* Gradient Text Animation */
+.gradient-text-animated {
+    background: linear-gradient(90deg, var(--neon-teal), var(--neon-green), var(--neon-cyan), var(--neon-teal));
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 4s ease infinite;
+}
+
+/* Upload Area Styles */
+#upload-area {
+    transition: all 0.3s ease;
+}
+
+#upload-area:hover {
+    border-color: var(--neon-teal);
+    background: rgba(0, 212, 170, 0.05);
+}
+
+#upload-area.dragover {
+    border-color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.1);
+    transform: scale(1.02);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, var(--neon-teal) 0%, var(--neon-green) 100%);
+    color: var(--space-900);
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-cyan) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0, 212, 170, 0.3);
+}
+
+.btn-primary span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Navigation Link Hover Effect */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-teal), var(--neon-green));
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Progress Bar Animation */
+.progress-bar-animated {
+    animation: progress-grow 1.5s ease-out forwards;
+}
+
+@keyframes progress-grow {
+    from {
+        width: 0;
+    }
+}
+
+/* Card 3D Effect */
+.card-3d {
+    perspective: 1000px;
+}
+
+.card-3d-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card-3d:hover .card-3d-inner {
+    transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Floating Animation */
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+.pulse-ring {
+    position: relative;
+}
+
+.pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--neon-teal);
+    border-radius: inherit;
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Responsive Helpers */
+@media (max-width: 768px) {
+    .glass-card {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Custom Loader */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid transparent;
+    border-top-color: var(--neon-teal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Circular Progress */
+.circular-progress {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--neon-teal) var(--progress, 0%),
+        rgba(255, 255, 255, 0.1) var(--progress, 0%)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circular-progress::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: var(--space-800);
+    border-radius: 50%;
+}
+
+.circular-progress span {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--neon-teal);
+}
+
+/* Smooth Transitions */
+* {
+    scroll-behavior: smooth;
+}
+
+/* Focus States */
+button:focus,
+a:focus,
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--neon-teal);
+}
+
+/* Image Hover Effect */
+.image-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 212, 170, 0.2);
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    padding: 8px 12px;
+    background: var(--space-600);
+    color: white;
+    font-size: 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

@@ -1,0 +1,31 @@
+{
+  "baseline_accuracy": 0.032105263157894734,
+  "final_accuracy": 0.9347368421052632,
+  "improvement": 0.9026315789473685,
+  "active_learning_history": [
+    {
+      "round": 0,
+      "samples": 200,
+      "accuracy": 0.9121052631578948
+    },
+    {
+      "round": 1,
+      "samples": 250,
+      "accuracy": 0.92,
+      "avg_uncertainty": 1.9172332286834717
+    },
+    {
+      "round": 2,
+      "samples": 300,
+      "accuracy": 0.9247368421052632,
+      "avg_uncertainty": 1.7758597135543823
+    },
+    {
+      "round": 3,
+      "samples": 350,
+      "accuracy": 0.9410526315789474,
+      "avg_uncertainty": 1.631899356842041
+    }
+  ],
+  "model_name": "ADSD"
+}
